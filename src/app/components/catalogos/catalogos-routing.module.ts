@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CatalogosComponent } from './catalogos.component';
+import { ReactiveForms } from './reactiveForms/reactiveforms.component';
 
 const routes: Routes = [
   {
     path: '',
-     component: CatalogosComponent,
+     component: ReactiveForms,
     data: {
       title: 'Catalogos'
     },    

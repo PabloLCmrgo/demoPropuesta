@@ -1,0 +1,87 @@
+<mat-dialog-content class="card mat-typography">
+    <div class="d-flex justify-content-end">
+        <mat-icon mat-button mat-dialog-close (click)="resetFormFields()">clear</mat-icon>
+    </div>
+    <h3>Usuarios</h3>
+    <div class="card-body">
+        <form [formGroup]="registerForm">
+            <!--  <div class="d-flex justify-content-end">
+                <button mat-raised-button color="accent" (click)="enableFormMeth()">Editar</button>
+            </div> -->
+            <div class="form-row">
+                <div class="form-group col-5">
+                    <label>Usuario</label>
+                    <input type="text" formControlName="userName" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && getValidators.userName.errors }" />
+                    <div *ngIf="submitted && getValidators.userName.errors" class="invalid-feedback">
+                        <div *ngIf="getValidators.userName.errors.required">El usuario es requerido</div>
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <label>Estatus</label>
+                    <select formControlName="userStatusId" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && getValidators.userStatusId.errors }">
+                        <option *ngFor="let status of ltsStatus" value={{status.userStatusId}}>{{status.name}}</option>
+                    </select>
+                    <div *ngIf="submitted && getValidators.userStatusId.errors" class="invalid-feedback">
+                        <div *ngIf="getValidators.userStatusId.errors.required">El estatus es requerido.</div>
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <label>Tipo de usuario</label>
+                    <select formControlName="userTypeId" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && getValidators.userTypeId.errors }">
+                        <option *ngFor="let userType of ltsUserTypes" value={{userType.userTypeId}}>{{userType.name}}
+                        </option>
+                    </select>
+                    <div *ngIf="submitted && getValidators.userTypeId.errors" class="invalid-feedback">
+                        <div *ngIf="getValidators.userTypeId.errors.required">El tipo de usuario es requerido.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && getValidators.email.errors }" />
+                <div *ngIf="submitted && getValidators.email.errors" class="invalid-feedback">
+                    <div *ngIf="getValidators.email.errors.required">Email es requerido</div>
+                    <div *ngIf="getValidators.email.errors.email">Ingrese un Email válido</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Password</label>
+                    <input type="password" formControlName="password" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && getValidators.password.errors }" />
+                    <div *ngIf="submitted && getValidators.password.errors" class="invalid-feedback">
+                        <div *ngIf="getValidators.password.errors.required">La contraseña es requerida</div>
+                        <div *ngIf="getValidators.password.errors.minlength">La contraseña debe contener al menos 6
+                            letras</div>
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <label>Confirm Password</label>
+                    <input type="password" formControlName="confirmPassword" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && getValidators.confirmPassword.errors }" />
+                    <div *ngIf="submitted && getValidators.confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="getValidators.confirmPassword.errors.required">Confirmar la contraseña es requerida
+                        </div>
+                        <div *ngIf="getValidators.confirmPassword.errors.mustMatch">Las contraseñas no coinciden</div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div *ngIf="this._dialogData?.actionToBeTaken">
+                    <button mat-button [mat-dialog-close]="true" mat-raised-button color="primary"
+                        (click)="onSubmitFromCreateUser()">Registrar</button>
+                </div>
+                <div *ngIf="this._dialogData?.res">
+                    <button mat-button [mat-dialog-close]="true" mat-raised-button color="primary"
+                        (click)="updateDataFromUpdateUserClass()">Actualizar</button>
+                </div>
+                <button mat-button mat-raised-button color="warn" type="reset" (click)="resetFormFields()">Limpiar
+                    formulario</button>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>
