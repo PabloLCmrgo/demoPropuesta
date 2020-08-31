@@ -12,7 +12,7 @@ export const Full_ROUTES: Routes = [
   },
   {
     path: 'graficos',
-    loadChildren: () => import('../../components/graficos/graficos.module').then(m => m.GraficosModule)
+    loadChildren: () => import('../../components/graphics/graphics.module').then(m => m.GraphicsModule)
   },
   {
     path: 'tablas',
