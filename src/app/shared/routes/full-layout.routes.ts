@@ -7,6 +7,10 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => import('../../changelog/changelog.module').then(m => m.ChangeLogModule)
   },
   {
+    path: 'observables',
+    loadChildren: () => import('../../components/observables/observables.module').then(m => m.ObservablesModule)
+  },
+  {
     path: 'catalogos',
     loadChildren: () => import('../../components/catalogos/catalogos.module').then(m => m.CatalogosModule)
   },

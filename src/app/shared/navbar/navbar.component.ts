@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { LayoutService } from '../services/layout.service';
 import { ConfigService } from '../services/config.service';
+import { SendMessageService } from 'app/@core/services/send-message.service';
 
 @Component({
   selector: "app-navbar",
@@ -19,13 +20,19 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   public config: any = {};
 
-  constructor(public translate: TranslateService, private layoutService: LayoutService, private configService:ConfigService) {
+  constructor(public translate: TranslateService, private layoutService: LayoutService, private configService:ConfigService, private _sendMessage: SendMessageService) {
     const browserLang: string = translate.getBrowserLang();
     translate.use(browserLang.match(/en|es|pt|de/) ? browserLang : "en");
 
   }
 
+  public mensaje: string = 'NavBar!'; // Nueva variable
+
   ngOnInit() {
+    this._sendMessage.nombre$.subscribe( txt => {
+      this.mensaje = txt;
+      console.log('NavBar', txt);
+    });
     this.config = this.configService.templateConf;
   }
 
