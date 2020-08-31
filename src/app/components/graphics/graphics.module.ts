@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { GraphicsRoutingModule } from './graphics-routing.module';
 
 import { NgxChartsComponent } from './ngx-charts/ngx-charts.component';
-import { NgxChartsFactoryComponent } from '../../components/graphics/graphicsfactory/ngx-charts/ngx-charts.component';
+import { NgxChartsFactoryComponent } from './graphicsfactory/ngx-charts/ngx-charts-factory.component';
 
 @NgModule({
   declarations: [NgxChartsComponent, NgxChartsFactoryComponent],

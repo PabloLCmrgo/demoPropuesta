@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
 import { barChartDataSimple } from '../../../../@core/mock/ngx-charts/dataBarSimpleMulti';
+import { GenerateBarChartService } from 'app/@core/services/generate-bar-chart.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-ngx-charts-factory',
   templateUrl: './ngx-charts-factory.component.html',
   styleUrls: ['./ngx-charts-factory.component.scss']
 })
-export class NgxChartsFactoryComponent {
+export class NgxChartsFactoryComponent implements AfterContentInit, OnDestroy {
+  public ObservableBarChart: Subscription;
   public barChartData: any[];
   view: any[] = [700, 400];
 
@@ -23,7 +26,7 @@ export class NgxChartsFactoryComponent {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
-  constructor() {
+  constructor(public _barChartService: GenerateBarChartService) {
     Object.assign(this, { barChartDataSimple })
   }
 
@@ -31,4 +34,13 @@ export class NgxChartsFactoryComponent {
     console.log(event);
   }
 
+  ngAfterContentInit() {
+    this.ObservableBarChart = this._barChartService.BarchartData$.subscribe(chartData => {
+      console.log(chartData);
+    })
+  }
+
+  ngOnDestroy() {
+    this.ObservableBarChart.unsubscribe();
+  }
 }
